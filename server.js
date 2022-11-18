@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const cors = require('cors');
+const corsOptions = require('./config/corsOption')
 const {logger} = require('./middleware/logEvents');
 const errHandler = require('./middleware/errHandler');
 const PORT = process.env.PORT || 3500;
@@ -10,22 +11,10 @@ const PORT = process.env.PORT || 3500;
 app.use(logger);
 
 //Cross Origin Resource Sharing
-const whitelist = ['https://www.myelisen.com', 'http://127.0.0.1:5500', 'http://localhost:3500']
-const corsOptions = {
-    origin: (origin, callback) => {
-        if(whitelist.indexOf(origin) !== -1 || !origin){
-            callback(null, true);
-        }else {
-            callback(new Error('NOT ALLOWED'))
-        }
-    },
-    optionsSuccesStatus: 200
-}
+
 app.use(cors(corsOptions));
 
-//built-in middleware to handle urlencoded data
-//in other words, form data:
-// 'content-type: application/x-www-form-urlencoded'
+//built-in middleware to handle urlencoded for data
 app.use(express.urlencoded({ extended: false }));
 
 //built-in middleware for json
@@ -33,11 +22,11 @@ app.use(express.json());
 
 //serve static files
 app.use(express.static(path.join(__dirname, '/public')))
-app.use('/subdir', express.static(path.join(__dirname, '/public')))
 
 // routes
 app.use('/', require('./routes/root'));
-app.use('/subdir', require('./routes/subdir'));
+app.use('/register', require('./routes/register'));
+app.use('/auth', require('./routes/auth'));
 app.use('/employees', require('./routes/api/employees'));
 
 app.all('*', (req, res) => {
