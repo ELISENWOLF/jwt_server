@@ -5,7 +5,6 @@ const usersDB = {
 
 const jwt = require('jsonwebtoken');
 const ROLES_LIST = require('../config/roles_list');
-require('dotenv').config();
 
 const handleRefreshToken = (req, res) => {
     const cookies = req.cookies;
