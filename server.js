@@ -47,6 +47,7 @@ app.use('/logout', require('./routes/logout'));
 
 app.use(verifyJWT);
 app.use('/employees', require('./routes/api/employees'));
+app.use('/users', require('./routes/api/users'));
 
 app.all('*', (req, res) => {
     res.status(404);
@@ -62,6 +63,6 @@ app.all('*', (req, res) => {
 app.use(errHandler);
 
 mongoose.connection.once('open', () => {
-    console.log("Connected to mongoDB");
-    app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+    console.log("Database Connection Successfull.");
+    app.listen(PORT, () => console.log(`Server runnig on ${PORT}`));
 });
