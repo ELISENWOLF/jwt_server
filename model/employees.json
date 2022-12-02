@@ -1,13 +1,12 @@
 [
-    {
-        "id": 1,
-        "firstname" : "Elisen",
-        "lastname" : "wolf"
-
-    },
-    {
-        "id": 2,
-        "firstname" : "wow",
-        "lastname" : "maker"
-    }
+  {
+    "id": 1,
+    "firstname": "Elisen",
+    "lastname": "wolf"
+  },
+  {
+    "id": 2,
+    "firstname": "wow",
+    "lastname": "maker"
+  }
 ]
